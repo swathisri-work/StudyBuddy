@@ -1,0 +1,68 @@
+[
+    {
+      "id": "q1",
+      "exam": "afcat",
+      "subject": "english",
+      "topic": "Synonyms and Antonyms",
+      "question": "Choose the synonym for 'Candid'.",
+      "options": ["Deceptive", "Frank", "Vague", "Secretive"],
+      "correctAnswer": 1,
+      "explanation": "Candid means truthful and straightforward; frank.",
+      "difficulty": "Easy"
+    },
+    {
+      "id": "q2",
+      "exam": "afcat",
+      "subject": "numerical_ability",
+      "topic": "Time and Work",
+      "question": "A can do a piece of work in 10 days and B can do it in 15 days. How long will they take if both work together?",
+      "options": ["5 days", "6 days", "8 days", "9 days"],
+      "correctAnswer": 1,
+      "explanation": "Work done by A in 1 day = 1/10. By B in 1 day = 1/15. Together = 1/10 + 1/15 = 5/30 = 1/6. Total days = 6.",
+      "difficulty": "Medium"
+    },
+    {
+      "id": "q3",
+      "exam": "afcat",
+      "subject": "general_awareness",
+      "topic": "Defense",
+      "question": "Who is the Supreme Commander of the Indian Armed Forces?",
+      "options": ["Prime Minister", "Chief of Defence Staff", "President", "Minister of Defence"],
+      "correctAnswer": 2,
+      "explanation": "The President of India is the Supreme Commander of the Indian Armed Forces.",
+      "difficulty": "Easy"
+    },
+    {
+      "id": "q4",
+      "exam": "tnpsc",
+      "subject": "tamil",
+      "topic": "இலக்கணம்",
+      "question": "கீழ்க்கண்டவற்றுள் எது சரியான சொல்?",
+      "options": ["அண்ணம்", "அன்னம்", "அனணம்", "அன்ணம்"],
+      "correctAnswer": 1,
+      "explanation": "'அன்னம்' என்பது பறவையைக் குறிக்கும் சரியான சொல்.",
+      "difficulty": "Easy"
+    },
+    {
+      "id": "q5",
+      "exam": "tnpsc",
+      "subject": "general_studies",
+      "topic": "Indian Polity",
+      "question": "Which Article of the Indian Constitution deals with Fundamental Duties?",
+      "options": ["Article 14", "Article 21", "Article 51A", "Article 32"],
+      "correctAnswer": 2,
+      "explanation": "Article 51A of the Indian Constitution specifies the Fundamental Duties.",
+      "difficulty": "Medium"
+    },
+    {
+      "id": "q6",
+      "exam": "tnpsc",
+      "subject": "aptitude",
+      "topic": "Percentage",
+      "question": "If 20% of of a number is 50, then what is the number?",
+      "options": ["200", "250", "300", "500"],
+      "correctAnswer": 1,
+      "explanation": "20% of x = 50 => (20/100)*x = 50 => x = (50*100)/20 = 250.",
+      "difficulty": "Easy"
+    }
+  ]

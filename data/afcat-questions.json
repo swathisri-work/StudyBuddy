@@ -1,0 +1,44 @@
+[
+  {
+    "id": "q1",
+    "exam": "afcat",
+    "subject": "english",
+    "topic": "Synonyms and Antonyms",
+    "question": "Choose the synonym for 'Candid'.",
+    "options": ["Deceptive", "Frank", "Vague", "Secretive"],
+    "correctAnswer": 1,
+    "explanation": "Candid means truthful and straightforward; frank.",
+    "difficulty": "Easy",
+    "language": "en",
+    "sourceType": "practice",
+    "sourceReference": "AFCAT English syllabus: synonyms and antonyms"
+  },
+  {
+    "id": "q2",
+    "exam": "afcat",
+    "subject": "numerical_ability",
+    "topic": "Time and Work",
+    "question": "A can complete a job in 10 days and B can complete it in 15 days. How many days will they take working together at constant rates?",
+    "options": ["5 days", "6 days", "8 days", "9 days"],
+    "correctAnswer": 1,
+    "explanation": "Their combined daily rate is 1/10 + 1/15 = 1/6 of the job, so the job takes 6 days.",
+    "difficulty": "Medium",
+    "language": "en",
+    "sourceType": "practice",
+    "sourceReference": "AFCAT Numerical Ability syllabus: time and work"
+  },
+  {
+    "id": "q3",
+    "exam": "afcat",
+    "subject": "general_awareness",
+    "topic": "Defence Awareness",
+    "question": "Who is the Supreme Commander of the Indian Armed Forces under the Constitution of India?",
+    "options": ["The Prime Minister", "The Chief of Defence Staff", "The President of India", "The Defence Minister"],
+    "correctAnswer": 2,
+    "explanation": "Article 53(2) of the Constitution vests the supreme command of the Defence Forces in the President.",
+    "difficulty": "Easy",
+    "language": "en",
+    "sourceType": "practice",
+    "sourceReference": "Constitution of India, Article 53(2)"
+  }
+]

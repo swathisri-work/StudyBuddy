@@ -1,0 +1,44 @@
+[
+  {
+    "id": "q4",
+    "exam": "tnpsc",
+    "subject": "tamil",
+    "topic": "இலக்கணம் — சரியான சொல்",
+    "question": "கீழ்க்கண்டவற்றுள் சரியான சொல்லைத் தேர்ந்தெடுக்கவும்.",
+    "options": ["அண்ணம்", "அன்னம்", "அனணம்", "அன்ணம்"],
+    "correctAnswer": 1,
+    "explanation": "‘அன்னம்’ என்பதே சரியான எழுத்துக்கூட்டல்.",
+    "difficulty": "Easy",
+    "language": "ta",
+    "sourceType": "practice",
+    "sourceReference": "TNPSC Group IV Tamil syllabus: எழுத்துப்பிழை திருத்தம்"
+  },
+  {
+    "id": "q5",
+    "exam": "tnpsc",
+    "subject": "general_studies",
+    "topic": "Indian Polity — Fundamental Duties",
+    "question": "இந்திய அரசியலமைப்பின் எந்தப் பிரிவு அடிப்படைக் கடமைகளைப் பற்றிக் குறிப்பிடுகிறது?",
+    "options": ["பிரிவு 14", "பிரிவு 21", "பிரிவு 51A", "பிரிவு 32"],
+    "correctAnswer": 2,
+    "explanation": "இந்திய அரசியலமைப்பின் பகுதி IVA-வில் உள்ள பிரிவு 51A அடிப்படைக் கடமைகளைப் பட்டியலிடுகிறது.",
+    "difficulty": "Medium",
+    "language": "ta",
+    "sourceType": "practice",
+    "sourceReference": "TNPSC Group IV General Studies syllabus: Indian Polity; Constitution of India, Part IVA"
+  },
+  {
+    "id": "q6",
+    "exam": "tnpsc",
+    "subject": "aptitude",
+    "topic": "Percentage — சதவீதம்",
+    "question": "ஒரு எண்ணின் 20% என்பது 50 எனில், அந்த எண் எது? (If 20% of a number is 50, what is the number?)",
+    "options": ["200", "250", "300", "500"],
+    "correctAnswer": 1,
+    "explanation": "எண்ணை x எனக் கொண்டால், 0.20x = 50; ஆகவே x = 50 ÷ 0.20 = 250. (Let the number be x: 0.20x = 50, so x = 250.)",
+    "difficulty": "Easy",
+    "language": "ta-en",
+    "sourceType": "practice",
+    "sourceReference": "TNPSC Group IV Aptitude syllabus: Percentage"
+  }
+]

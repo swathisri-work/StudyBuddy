@@ -1,0 +1,49 @@
+{
+  "generatedAt": "2026-10-10T12:40:46.093Z",
+  "banks": {
+    "data/afcat-previous.json": {
+      "records": 399,
+      "invalid": 0,
+      "reviewRequired": 399,
+      "validated": 0
+    },
+    "data/afcat-practice.json": {
+      "records": 0,
+      "invalid": 0,
+      "reviewRequired": 0,
+      "validated": 0
+    },
+    "data/tnpsc-previous.json": {
+      "records": 30,
+      "invalid": 0,
+      "reviewRequired": 30,
+      "validated": 0
+    },
+    "data/tnpsc-practice.json": {
+      "records": 0,
+      "invalid": 0,
+      "reviewRequired": 0,
+      "validated": 0
+    },
+    "data/question-review.json": {
+      "records": 3137,
+      "invalid": 0,
+      "reviewRequired": 3137,
+      "validated": 0
+    },
+    "data/gk-facts.json": {
+      "records": 0,
+      "invalid": 0,
+      "reviewRequired": 0,
+      "validated": 0
+    }
+  },
+  "totals": {
+    "records": 3566,
+    "reviewRequired": 3566,
+    "validated": 0,
+    "duplicateIds": 0,
+    "duplicateTexts": 112
+  },
+  "issues": []
+}

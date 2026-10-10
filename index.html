@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyMate – Your Personal Exam Preparation Companion</title>
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Landing Page -->
+    <div id="landing-page" class="view active">
+        <div class="landing-header">
+            <h1>StudyMate</h1>
+            <h2>Your Personal Exam Preparation Companion</h2>
+            <p>One platform. Two aspirants. One goal: success.</p>
+        </div>
+
+        <div class="profile-container" aria-label="Choose a study profile">
+            <article class="profile-card afcat-theme">
+                <div class="profile-icon" aria-hidden="true"><i class="fa-solid fa-plane"></i></div>
+                <h3>Jayakumar H S</h3>
+                <p class="exam-name">AFCAT</p>
+                <p class="subtitle">Prepare for a career in the Indian Air Force.</p>
+                <button class="btn btn-primary" onclick="app.selectProfile('afcat')">Enter AFCAT Dashboard</button>
+            </article>
+            <article class="profile-card tnpsc-theme">
+                <div class="profile-icon" aria-hidden="true"><i class="fa-solid fa-book-open"></i></div>
+                <h3>Swathisri B A</h3>
+                <p class="exam-name">TNPSC Group 4</p>
+                <p class="subtitle">Prepare for Tamil Nadu government examinations.</p>
+                <button class="btn btn-primary" onclick="app.selectProfile('tnpsc')">Enter TNPSC Dashboard</button>
+            </article>
+        </div>
+    </div>
+
+    <!-- Main Dashboard Application Shell -->
+    <div id="app-container" class="view">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>StudyMate</h2>
+                <button id="switch-profile-btn" onclick="app.showLandingPage()">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Switch Profile
+                </button>
+            </div>
+
+            <div class="active-profile-info">
+                <div class="avatar"><i class="fa-solid fa-user"></i></div>
+                <div class="info">
+                    <strong id="sidebar-student-name">Student Name</strong>
+                    <span id="sidebar-exam-name">Exam Name</span>
+                </div>
+            </div>
+
+            <ul class="nav-links">
+                <li class="active" onclick="app.navigate('dashboard')"><i class="fa-solid fa-chart-pie"></i> Dashboard
+                </li>
+                <li onclick="app.navigate('syllabus')"><i class="fa-solid fa-list-check"></i> Syllabus</li>
+                <li onclick="app.navigate('materials')"><i class="fa-solid fa-file-pdf"></i> Study Materials</li>
+                <li onclick="app.navigate('practice')"><i class="fa-solid fa-pen-to-square"></i> Daily Practice</li>
+                <li onclick="app.navigate('subject-practice')"><i class="fa-solid fa-layer-group"></i> Subject Practice
+                </li>
+                <li onclick="app.navigate('mock-tests')"><i class="fa-solid fa-stopwatch"></i> Mock Tests</li>
+                <li onclick="app.navigate('gk-facts')"><i class="fa-solid fa-lightbulb"></i> GK Facts</li>
+                <li onclick="app.navigate('planner')"><i class="fa-solid fa-calendar-days"></i> Study Planner</li>
+                <li onclick="app.navigate('notes')"><i class="fa-solid fa-clipboard"></i> Notes & Bookmarks</li>
+                <li onclick="app.navigate('revision')"><i class="fa-solid fa-rotate-left"></i> Revision</li>
+                <li onclick="app.navigate('progress')"><i class="fa-solid fa-arrow-trend-up"></i> Progress</li>
+                <li onclick="app.navigate('settings')"><i class="fa-solid fa-gear"></i> Settings</li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="topbar">
+                <button id="menu-toggle" class="mobile-only" onclick="app.toggleSidebar()"><i
+                        class="fa-solid fa-bars"></i></button>
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search syllabus, notes, materials...">
+                </div>
+                <button class="chatbot-toggle" onclick="chatbot.toggle()"><i class="fa-solid fa-comment-dots"></i>
+                    Assistant</button>
+            </header>
+
+            <div id="content-views" class="content-body">
+                <!-- Dashboard View -->
+                <div id="view-dashboard" class="page-view active">
+                    <h2 class="page-title">Welcome back, <span id="dash-student-name"></span>!</h2>
+                    <p class="page-subtitle">Your <span id="dash-exam-name"></span> overview</p>
+
+                    <div class="dashboard-grid">
+                        <div class="card stat-card">
+                            <h3><i class="fa-solid fa-fire"></i> Study Streak</h3>
+                            <div class="stat-value" id="stat-streak">0 Days</div>
+                        </div>
+                        <div class="card stat-card">
+                            <h3><i class="fa-solid fa-bullseye"></i> Accuracy</h3>
+                            <div class="stat-value" id="stat-accuracy">0%</div>
+                        </div>
+                        <div class="card stat-card">
+                            <h3><i class="fa-solid fa-check-double"></i> Questions</h3>
+                            <div class="stat-value" id="stat-questions">0 Attempted</div>
+                        </div>
+
+                        <div class="card tasks-card">
+                            <h3>Today's Tasks</h3>
+                            <ul id="dash-tasks-list" class="dash-list">
+                                <li class="empty-state">No tasks for today. Add one in the planner!</li>
+                            </ul>
+                            <button class="btn btn-secondary btn-sm" onclick="app.navigate('planner')">Go to
+                                Planner</button>
+                        </div>
+
+                        <div class="card recent-activity-card">
+                            <h3><i class="fa-solid fa-users"></i> Partner's Shared Progress</h3>
+                            <div id="partner-stats-container">
+                                <p>Loading partner's stats...</p>
+                            </div>
+                            <div style="margin-top: 15px;">
+                                <input type="text" id="reminder-msg" placeholder="Write a reminder..."
+                                    style="width: calc(100% - 70px); padding: 8px; border: 1px solid #ccc; border-radius:4px;">
+                                <button class="btn btn-primary btn-sm" onclick="app.sendReminder()">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Syllabus View -->
+                <div id="view-syllabus" class="page-view" style="display: none;">
+                    <button class="btn btn-secondary back-btn" onclick="app.goBack()" style="margin-bottom:10px;"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    <h2 class="page-title">Syllabus & Subjects</h2>
+                    <div id="syllabus-container"></div>
+                </div>
+
+                <!-- Study Materials View -->
+                <div id="view-materials" class="page-view" style="display: none;">
+                    <button class="btn btn-secondary back-btn" onclick="app.goBack()" style="margin-bottom:10px;"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    <h2 class="page-title">Study Materials</h2>
+                    <div id="materials-container" class="materials-grid"></div>
+                </div>
+
+                <!-- Daily Practice -->
+                <div id="view-practice" class="page-view" style="display: none;">
+                    <button class="btn btn-secondary back-btn" onclick="app.goBack()" style="margin-bottom:10px;"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    <h2 class="page-title">Daily Practice</h2>
+                    <div class="quiz-setup card">
+                        <h3>Start Daily Practice</h3>
+                        <p>Choose a subject and question count. The available question count depends on the loaded
+                            question bank.</p>
+                        <label for="practice-subject-select">Subject</label>
+                        <select id="practice-subject-select" onchange="quiz.updateAvailability()"></select>
+                        <label for="practice-type-select">Question source</label>
+                        <select id="practice-type-select" onchange="quiz.updateAvailability()"><option value="all">Mixed</option><option value="previous-year">Previous-year only</option><option value="practice">Generated practice only</option></select>
+                        <label for="practice-year-select">Year</label>
+                        <select id="practice-year-select" onchange="quiz.updateAvailability()"><option value="all">All years</option></select>
+                        <label for="practice-count-select">Questions</label>
+                        <select id="practice-count-select" class="question-count-select">
+                            <option value="10">10 Questions</option>
+                            <option value="25">25 Questions</option>
+                            <option value="50">50 Questions</option>
+                            <option value="100">100 Questions</option>
+                        </select>
+                        <p id="practice-availability" class="text-muted" aria-live="polite"></p>
+                        <button class="btn btn-primary" onclick="quiz.startPractice(false)">Start Daily
+                            Practice</button>
+                    </div>
+                </div>
+
+                <div id="view-subject-practice" class="page-view" style="display: none;">
+                    <button class="btn btn-secondary back-btn" onclick="app.goBack()" style="margin-bottom:10px;"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    <h2 class="page-title">Subject Practice</h2>
+                    <div class="quiz-setup card">
+                        <h3>Targeted Practice</h3>
+                        <label for="subject-practice-subject-select">Subject</label>
+                        <select id="subject-practice-subject-select" onchange="quiz.refreshFilters()">
+                            <!-- Populated dynamically -->
+                        </select>
+                        <label for="subject-practice-topic-select">Topic</label>
+                        <select id="subject-practice-topic-select" onchange="quiz.updateAvailability()">
+                            <option value="all">All topics</option>
+                        </select>
+                        <label for="subject-practice-difficulty-select">Difficulty</label>
+                        <select id="subject-practice-difficulty-select" onchange="quiz.updateAvailability()">
+                            <option value="all">All difficulties</option>
+                        </select>
+                        <label for="subject-practice-count-select">Questions</label>
+                        <select id="subject-practice-count-select" class="question-count-select">
+                            <option value="10">10 Questions</option>
+                            <option value="25">25 Questions</option>
+                            <option value="50">50 Questions</option>
+                            <option value="100">100 Questions</option>
+                        </select>
+                        <p id="subject-practice-availability" class="text-muted" aria-live="polite"></p>
+                        <button class="btn btn-primary" onclick="quiz.startPractice(true)">Start Subject
+                            Practice</button>
+                    </div>
+                </div>
+
+                <!-- Quiz Interface (Shared for Practice and Mocks) -->
+                <div id="view-quiz-active" class="page-view" style="display: none;">
+                    <button class="btn btn-secondary back-btn" onclick="app.goBack()" style="margin-bottom:10px;"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    <div class="quiz-header">
+                        <h2 id="quiz-title">Practice Session</h2>
+                        <div class="quiz-timer" id="quiz-timer" style="display: none;">00:00</div>
+                    </div>
+
+                    <div class="quiz-layout">
+                        <div class="quiz-main">
+                            <div class="card question-card" id="question-container">
+                                <!-- Question injected here -->
+                            </div>
+                            <div class="quiz-controls">
+                                <button class="btn btn-secondary" onclick="quiz.prevQuestion()">Previous</button>
+                                <button class="btn btn-secondary" id="mark-review-btn"
+                                    onclick="quiz.toggleMarkForReview()">Mark for Review</button>
+                                <button class="btn btn-primary" id="check-answer-btn" onclick="quiz.checkAnswer()">Check
+                                    Answer</button>
+                                <button class="btn btn-primary" onclick="quiz.nextQuestion()">Next</button>
+                                <button class="btn btn-success" id="finish-quiz-btn" onclick="quiz.showFinishAttempt()">Finish attempt…</button>
+                            </div>
+                        </div>
+                        <aside class="quiz-sidebar card" aria-label="Question palette and status legend">
+                            <h3>Quiz navigation</h3>
+                            <div class="palette-scroll" id="question-palette-scroll">
+                                <div id="question-palette" class="palette-grid"></div>
+                            </div>
+                            <div class="palette-legend" aria-label="Question status legend">
+                                <span><i class="legend-swatch legend-unanswered" aria-hidden="true"></i>Not answered</span>
+                                <span><i class="legend-swatch legend-answered" aria-hidden="true"></i>Answered</span>
+                                <span><i class="legend-swatch legend-marked" aria-hidden="true"></i>Marked for review</span>
+                                <span><i class="legend-swatch legend-answered-marked" aria-hidden="true"></i>Answered + marked</span>
+                                <span><i class="legend-swatch legend-current" aria-hidden="true"></i>Current question (border)</span>
+                            </div>
+                            <button class="btn btn-success finish-attempt-btn" type="button" onclick="quiz.showFinishAttempt()">Finish attempt…</button>
+                        </aside>
+                    </div>
+                </div>
+
+                <div id="finish-attempt-modal" class="finish-attempt-modal" hidden role="dialog" aria-modal="true" aria-labelledby="finish-attempt-title">
+                    <div class="finish-attempt-dialog card">
+                        <h2 id="finish-attempt-title">Finish attempt?</h2>
+                        <p>Review your progress before submitting. You can return to the test without losing your answers.</p>
+                        <dl class="finish-attempt-summary">
+                            <div><dt>Answered</dt><dd id="finish-answered-count">0</dd></div>
+                            <div><dt>Unanswered</dt><dd id="finish-unanswered-count">0</dd></div>
+                            <div><dt>Marked for review</dt><dd id="finish-marked-count">0</dd></div>
+                        </dl>
+                        <div class="finish-attempt-actions">
+                            <button class="btn btn-secondary" type="button" onclick="quiz.cancelFinishAttempt()">Return to test</button>
+                            <button class="btn btn-success" type="button" onclick="quiz.confirmFinishAttempt()">Confirm submission</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Results -->
+                <div id="view-quiz-results" class="page-view" style="display: none;">
+                    <button class="btn btn-secondary back-btn" onclick="app.goBack()" style="margin-bottom:10px;"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    <h2 class="page-title">Session Results</h2>
+                    <div class="results-summary card">
+                        <div class="score-circle">
+                            <span id="result-score">0/0</span>
+                        </div>
+                        <div class="score-details">
+                            <p>Correct: <span id="res-correct" class="text-success">0</span></p>
+                            <p>Incorrect: <span id="res-incorrect" class="text-danger">0</span></p>
+                            <p>Unanswered: <span id="res-unanswered">0</span></p>
+                            <p>Accuracy: <span id="res-accuracy">0%</span></p>
+                            <p id="res-marks-container" style="display:none;">Marks: <span id="res-marks">0</span></p>
+                        </div>
+                    </div>
+                    <div class="results-review card" id="results-review-container">
+                        <h3>Detailed Review</h3>
+                        <!-- Explanations injected here -->
+                    </div>
+                </div>
+
+                <!-- Mock Tests View -->
+                <div id="view-mock-tests" class="page-view" style="display: none;">
+                    <button class="btn btn-secondary back-btn" onclick="app.goBack()" style="margin-bottom:10px;"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    <h2 class="page-title">Mock Tests</h2>
+                    <div class="card">
+                        <h3>Timed Mock Test</h3>
+                        <p id="mock-test-size" class="text-muted"></p>
+                        <p id="mock-test-info" class="text-muted"></p>
+                        <button class="btn btn-primary" onclick="quiz.startMockTest()">Start Mock Test</button>
+                    </div>
+                    <div id="attempt-history" class="card"></div>
+                </div>
+
+                <!-- GK Facts View -->
+                <div id="view-gk-facts" class="page-view" style="display: none;">
+                    <button class="btn btn-secondary back-btn" onclick="app.goBack()" style="margin-bottom:10px;"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    <h2 class="page-title">GK Fact of the Day</h2>
+                    <div class="card gk-card text-center">
+                        <label for="gk-search">Search facts</label>
+                        <input id="gk-search" type="search" placeholder="Search category or fact" oninput="app.renderGkFacts()">
+                        <label for="gk-category-filter">Category</label>
+                        <select id="gk-category-filter" onchange="app.renderGkFacts()"><option value="all">All categories</option></select>
+                        <h3 id="gk-fact-category" class="category-badge">Category</h3>
+                        <p id="gk-fact-counter" class="text-muted" style="font-weight: bold; margin-bottom: 10px;"></p>
+                        <p id="gk-fact-content" class="fact-text">Loading...</p>
+                        <p id="gk-fact-context" class="text-muted"></p>
+                        <p id="gk-fact-source" class="text-muted"></p>
+                        <div class="gk-controls">
+                            <button class="btn btn-secondary" id="gk-prev-btn" onclick="app.prevGkFact()">Previous</button>
+                            <button class="btn btn-primary" id="gk-next-btn" onclick="app.nextGkFact()">Next Fact</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Planner View -->
+                <div id="view-planner" class="page-view" style="display: none;">
+                    <button class="btn btn-secondary back-btn" onclick="app.goBack()" style="margin-bottom:10px;"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    <h2 class="page-title">Study Planner</h2>
+                    <div class="planner-layout">
+                        <div class="card planner-add">
+                            <h3>Add Task</h3>
+                            <input type="text" id="planner-task-desc" placeholder="E.g. Revise Tamil grammar">
+                            <input type="date" id="planner-task-date">
+                            <button class="btn btn-primary" onclick="planner.addTask()">Add Task</button>
+                        </div>
+                        <div class="card planner-list">
+                            <h3>Upcoming Tasks</h3>
+                            <ul id="planner-tasks-container" class="dash-list"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notes & Bookmarks View -->
+                <div id="view-notes" class="page-view" style="display: none;">
+                    <button class="btn btn-secondary back-btn" onclick="app.goBack()" style="margin-bottom:10px;"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    <h2 class="page-title">Notes & Bookmarks</h2>
+                    <div class="tabs">
+                        <button class="tab-btn active" onclick="notes.switchTab('notes')">My Notes</button>
+                        <button class="tab-btn" onclick="notes.switchTab('bookmarks')">Bookmarks</button>
+                    </div>
+                    <div id="notes-tab" class="tab-content">
+                        <div class="add-note card">
+                            <h3>Create Note</h3>
+                            <input type="text" id="note-title" placeholder="Note Title">
+                            <textarea id="note-content" placeholder="Write your notes here..."></textarea>
+                            <button class="btn btn-primary" onclick="notes.addNote()">Save Note</button>
+                        </div>
+                        <div id="notes-list" class="notes-grid"></div>
+                    </div>
+                    <div id="bookmarks-tab" class="tab-content" style="display: none;">
+                        <div id="bookmarks-list" class="bookmarks-list card"></div>
+                    </div>
+                </div>
+
+                <!-- Progress View -->
+                <div id="view-progress" class="page-view" style="display: none;">
+                    <button class="btn btn-secondary back-btn" onclick="app.goBack()" style="margin-bottom:10px;"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    <h2 class="page-title">Performance Analytics</h2>
+                    <div class="progress-stats-grid">
+                        <div class="card stat-card">
+                            <h3>Total Attempted</h3>
+                            <div class="stat-value" id="prog-total">0</div>
+                        </div>
+                        <div class="card stat-card text-success">
+                            <h3>Total Correct</h3>
+                            <div class="stat-value" id="prog-correct">0</div>
+                        </div>
+                        <div class="card stat-card text-danger">
+                            <h3>Total Incorrect</h3>
+                            <div class="stat-value" id="prog-incorrect">0</div>
+                        </div>
+                        <div class="card stat-card">
+                            <h3>Overall Accuracy</h3>
+                            <div class="stat-value" id="prog-accuracy">0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Revision View -->
+                <div id="view-revision" class="page-view" style="display: none;">
+                    <button class="btn btn-secondary back-btn" onclick="app.goBack()" style="margin-bottom:10px;"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    <h2 class="page-title">Revision</h2>
+                    <div id="revision-list" class="card"></div>
+                </div>
+
+                <!-- Settings View -->
+                <div id="view-settings" class="page-view" style="display: none;">
+                    <button class="btn btn-secondary back-btn" onclick="app.goBack()" style="margin-bottom:10px;"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    <h2 class="page-title">Settings & Profile</h2>
+                    <div class="card">
+                        <h3>Profile Switching</h3>
+                        <p>Currently logged in as: <strong id="settings-student-name"></strong> (<span
+                                id="settings-exam-name"></span>)</p>
+                        <button class="btn btn-primary" onclick="app.showLandingPage()" style="margin-top: 15px;">Switch
+                            Profile</button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Chatbot / Study Assistant -->
+        <div id="chatbot-panel" class="chatbot-panel" style="display: none;">
+            <div class="chatbot-header">
+                <h3>Study Assistant</h3>
+                <button onclick="chatbot.toggle()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="chatbot-messages" id="chatbot-messages">
+                <div class="msg-bot">Hello! I am your study assistant. How can I help you today?</div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chat-input" placeholder="Ask a question..."
+                    onkeypress="chatbot.handleEnter(event)">
+                <button onclick="chatbot.sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/notes.js"></script>
+    <script src="js/planner.js"></script>
+    <script src="js/quiz.js"></script>
+    <script src="js/materials.js"></script>
+    <script src="js/syllabus.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
